@@ -1,0 +1,102 @@
+Channels and other fun things
+First Meetup
+21 Aug 2014
+
+Trey Tacon
+RightBrain Networks
+@ttacon
+ttacon@gmail.com
+
+* Quick Recap
+
+- Meetup Frequency
+- Meetup Structure
+
+* About Me
+
+- Joined RightBrain Networks this June
+- Last company was Yext
+- Lots and lots of Go at Yext
+- I love Go
+.link http://github.com/ttacon
+
+* Topics
+
+- Channels
+- Interfaces
+- Fun facts: struct{}
+
+* channels
+
+* what's a channel?
+
+- well everyone remembers them from Newsqueak...
+- an intuitive construct for communication
+- think pipes
+
+.code 20140820/channel.go /START/,/STOP/
+
+* Unbuffered Channels
+.play -edit 20140820/unbuffered.go 
+
+* Unbuffered Channels
+.image unbuffered.png
+
+* Buffered Channels
+.image buffered.png
+
+* Buffered Channels
+- These are a little more subtle to reason about
+- Removes synchronous guarantee
+
+* So why do we need channels?
+goroutines! yay!
+
+.image gopher-swing.jpg
+
+* But seriously: goroutines
+.code 20140820/goroutines.go /START/,/STOP/
+
+* select{}
+.play 20140820/goroutines.go /START2/,/STOP2/
+
+* What else can we do with goroutines/channels?
+
+- multiple senders
+- multiple readers
+- timeouts
+- service factories
+
+* interfaces
+
+* Interfaces, go style
+
+- structurally typed interfaces
+- if you implement the methods in an interface, you implement the interface
+- no need to tell everyone about everything you implement
+- don't really need inheritance
+
+* io package
+
+- io.Reader
+- io.Writer
+- io.Copy(dst io.Writer, src io.Reader)
+
+* interface{}
+
+- everything satisfies interface{}
+
+* interfaces over structs
+
+- makes testing much easier
+- makes the whole system "pluggable"/"extensible"
+- no need to expose every system/library detail
+- interfaces with unexported methods
+
+.code 20140820/concreteinterface.go /START/,/STOP/
+
+* cool tidbit - empty struct
+
+- struct{} = 0 bytes
+
+.code 20140820/emptystruct.go
