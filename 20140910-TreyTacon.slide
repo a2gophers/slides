@@ -1,0 +1,90 @@
+Go and the Web
+Second Meetup
+10 Sep 2014
+
+Trey Tacon
+RightBrain Networks
+@ttacon
+ttacon@gmail.com
+
+* Quick Housekeeping
+
+- Requesting Topics
+- Community Projects?
+
+* ok
+
+.play -edit 20140910/ok.go
+
+* Static Files
+
+.play -edit 20140910/static.go
+
+* Route Matching - No Wildcards
+
+.play -edit 20140910/standard.go
+
+* Route Matching - Wildcards
+
+.play -edit 20140910/wildcards.go /START/,/STOP/
+
+* Good Routers
+
+- Martini's
+.link https://github.com/go-martini/martini
+
+- Gorilla's
+.link http://www.gorillatoolkit.org/pkg/mux
+
+- Tiger Tonic's
+.link https://github.com/rcrowley/go-tigertonic
+
+- Some more
+.link https://github.com/cypriss/golang-mux-benchmark
+
+* JSON much?
+
+- Marshalling (struct/map/slice -> JSON)
+- Unmarshalling (JSON -> struct/map/slice)
+
+* JSON Unmarshalling
+
+.play -edit 20140910/marshalling.go
+
+* JSON Unmarshalling
+
+.play -edit 20140910/unmarshalling.go
+
+* Templating
+
+- html/template
+.link http://golang.org/pkg/html/template/
+- Soy
+.link https://github.com/robfig/soy
+- Mustache
+.link https://github.com/hoisie/mustache
+
+* Middleware?
+
+- Authentication
+- Logging
+- Catching panics
+- Sessions
+- Compression
+
+(use martini or negroni)
+
+* Middleware - Example
+
+.play 20140910/middleware.go /START/,/STOP/
+
+* Web Frameworks
+
+- Revel
+- Martini
+
+- Beego
+- gocraft/web
+- pilu/traffic
+
+
