@@ -1,0 +1,182 @@
+Intro to Go and why we're so opinionated
+08 Apr 2015
+
+Trey Tacon
+Barracuda Networks
+@ttacon
+ttacon@gmail.com
+
+* Meetup Plan
+
+- Meetup Frequency
+- Meetup Structure
+
+* About Me
+
+- I love Go
+.link http://github.com/ttacon
+
+* Topics
+
+- Why Go
+- Why not Go
+- How to get it
+- How to use it
+- Environment
+- Ecosystem
+- Language structure
+- Implicit concurrency (go routines and channels)
+- Interfaces (and interface composition)
+
+
+* Why Go
+
+- Semantic concurrency is awesome
+- Use it for anything network related or that requires extreme concurrency
+- Super easy to write
+
+
+* Why not Go
+
+- Most Gophers won't mention this, but:
+- Semantic concurrency != best for everything
+- Concurrency DOES NOT make everything faster
+- If you're only using libraries wrapping C code
+
+
+* How to get it
+
+.link https://golang.org/doc/install/source
+
+- Yes, please install from source
+- Oh, why you ask?
+- Because then switching versions is SUPER easy
+
+
+* How to use it
+
+- Write some code and "go run" it!
+- But seriously...
+- "go install/build" => build your own command line utilities
+- "go help" is your friend
+
+* Environment
+
+- $GOROOT
+- $GOPATH
+- $GOBIN
+  $GOPATH/
+        src/
+        bin/
+        pkg/
+- you can even go crazy:
+  $GOPATH-1/
+        src/
+        bin/
+        pkg/
+  ...
+  $GOPATH-2/
+        src/
+        bin/
+        pkg/
+
+
+* Ecosystem
+
+- Yay (and boo) for open source
+- github is your friend
+- Follow Gophers (github, twitter)
+- it's a great language to get you started in open source development
+
+
+* "Language" structure
+
+- "Structs"
+- Pointers
+- Interfaces
+- Functions
+
+* Builtin types
+
+- the usual suspects: [u]int[8,16,32,64], strings etc...
+- slices
+- maps
+- you DO NOT need generics
+
+
+* Semantic concurrency (go routines and channels)
+
+* what's a channel?
+
+- well everyone remembers them from Newsqueak...
+- an intuitive construct for communication
+- think pipes
+
+
+* Unbuffered Channels
+.image ../unbuffered.png
+
+
+* Buffered Channels
+.image ../buffered.png
+
+
+* Buffered Channels
+- These are a little more subtle to reason about
+- Removes synchronous guarantee
+
+
+* So why do we need channels?
+goroutines! yay!
+
+.image ../gopher-swing.jpg
+
+
+* But seriously: goroutines
+.play ../20140820/goroutines.go /START/,/STOP/
+
+
+* What else can we do with goroutines/channels?
+
+- multiple senders
+- multiple readers
+- timeouts
+- service factories
+
+
+* Interfaces (and interface composition)
+
+
+* Interfaces, go style
+
+- structurally typed interfaces
+- if you implement the methods in an interface, you implement the interface
+- no Java BS - no need to tell everyone about everything you implement
+- don't need inheritance
+- you can get "almost all" the same semantics with struct extension and interfaces
+
+
+* io package
+
+- io.Reader
+- io.Writer
+- io.Copy(dst io.Writer, src io.Reader)
+
+
+* interface{}
+
+- everything satisfies interface{}
+
+
+* interfaces over structs
+
+- makes testing much easier
+- makes the whole system "pluggable"/"extensible"
+- no need to expose every system/library detail
+
+.code ../20140820/concreteinterface.go /START/,/STOP/
+
+- this isn't to say you'll always see this choice reflected in the stdlib
+
+* So Go play with some Go!
+- "You can do it!"

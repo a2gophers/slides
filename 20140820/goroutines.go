@@ -4,14 +4,21 @@ package main
 import (
 	"fmt"
 	"net/http"
+	"time"
 )
 
 func main() {
 	var (
 		work  = make(chan string, 500)
 		valid = make(chan string, 500)
-		urls  = []string{"http://github.com", "http://google.com"} // some long source
-		done  = make(chan bool, 10)
+		urls  = []string{ // some long source
+			"http://github.com",
+			"http://google.com",
+		}
+		done       = make(chan bool, 10)
+		httpClient = &http.Client{
+			Timeout: time.Second,
+		}
 	)
 
 	var sendIfValid = func(
@@ -28,7 +35,7 @@ func main() {
 	// START OMIT
 	worker := func(work chan string) {
 		for url := range work {
-			resp, err := http.Get(url)
+			resp, err := httpClient.Get(url)
 			sendIfValid(url, resp, err, valid)
 		}
 		done <- true
