@@ -1,0 +1,118 @@
+Web Services in Go
+02 June 2015
+
+Trey Tacon
+Barracuda Networks
+@ttacon
+ttacon@gmail.com
+
+* Web Services in Go
+
+- Super simple as we'll see
+- Won't go into everything
+- Mostly an outline, a bunch of resources, and we can make a plan of attack for later!
+
+* net/http
+
+- http.HandleFunc
+   HandleFunc registers the handler function for the given pattern in
+   the DefaultServeMux. The documentation for ServeMux explains how
+   patterns are matched.
+
+- http.ListenAndServe/ListenAndServeTLS
+   ListenAndServe listens on the TCP network address addr and then calls
+   Serve with handler to handle requests on incoming connections. Handler
+   is typically nil, in which case the DefaultServeMux is used.
+
+* Using Handlers
+
+.play ../../web-services/http-based/main.go /START/,/STOP/
+
+* Routers!!!
+
+- There are way too many of them...
+.link https://github.com/julienschmidt/go-http-routing-benchmark Router Benchmarks
+
+.html html/benchmarks.html
+
+* Router: Example
+
+.play ../../web-services/router-based/main.go /START/,/STOP/
+
+* database/sql
+
+- func sql.Open(driverName, dataSourceName string) (*DB, error)
+  Open opens a database specified by its database driver name and a
+  driver-specific data source name, usually consisting of at least a
+  database name and connection information.
+
+- Your three best friends: Exec(), Query(), QueryRow()
+
+- Notice something interesting about *sql.DB and *sql.Tx...
+
+.link https://github.com/ttacon/pouch From Pouch...
+
+  // Executor is a convenience wrapper that allows both *sql.DB and
+  // *sql.DB to be as Pouches.
+  type Executor interface {
+     Exec(query string, args ...interface{}) (sql.Result, error)
+     Query(query string, args ...interface{}) (*sql.Rows, error)
+     QueryRow(query string, args ...interface{}) *sql.Row
+  }
+
+* But for speeds sake...
+
+.link https://github.com/go-gorp/gorp Gorp
+
+- Back in the day...
+- It's plays pretty nicely...
+- But it is SLOWWWWWWWWWWWW
+
+* Gorp Setup
+
+.code ../../web-services/with-db/main.go /START/,/STOP/
+
+* Gorp Inserting
+.code ../../web-services/with-db/main.go /START1/,/STOP1/
+
+* Gorp Querying
+.code ../../web-services/with-db/main.go /START2/,/STOP2/
+
+* WEBSOCKETS!!! WHOOO!
+.link https://github.com/gorilla/websocket github.com/gorilla/websocket
+
+- for the most part you just need to set up the "upgrader"
+  var upgrader = websocket.Upgrader{
+    ReadBufferSize:  1024,
+    WriteBufferSize: 1024,
+  }
+
+* Using the websocket
+- upgrading connections:
+  func handler(w http.ResponseWriter, r *http.Request) {
+    conn, err := upgrader.Upgrade(w, r, nil)
+    if err != nil {
+        log.Println(err)
+        return
+    }
+    // ... Use conn to send and receive messages.
+  }
+
+
+- using the websocket
+  for {
+    messageType, p, err := conn.ReadMessage()
+    if err != nil {
+        return
+    }
+    if err = conn.WriteMessage(messageType, p); err != nil {
+        return err
+    }
+  }
+
+* So what did we go over?
+
+- Setting up a webserver
+- Connecting and using the database
+- Using websockets
+- ^ that's most of what you need!
