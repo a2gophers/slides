@@ -1,0 +1,22 @@
+# xmux
+trey@mariner9:~$ wrk -t4 -c100 -d30S --timeout 2000 "http://127.0.0.1:18016/api/nested/yolo/herro"
+Running 30s test @ http://127.0.0.1:18016/api/nested/yolo/herro
+  4 threads and 100 connections
+  Thread Stats   Avg      Stdev     Max   +/- Stdev
+    Latency     1.09ms  437.46us  39.14ms   96.15%
+    Req/Sec    22.93k     1.48k   30.53k    76.42%
+  2738555 requests in 30.01s, 302.96MB read
+  Requests/sec:  91240.42
+Transfer/sec:     10.09MB
+
+
+# express.js
+trey@mariner9:~$ wrk -t4 -c100 -d30S --timeout 2000 "http://127.0.0.1:18015/api/nested/yolo/herro"
+Running 30s test @ http://127.0.0.1:18015/api/nested/yolo/herro
+  4 threads and 100 connections
+  Thread Stats   Avg      Stdev     Max   +/- Stdev
+    Latency     9.53ms    1.06ms  67.80ms   95.01%
+    Req/Sec     2.64k   154.96     2.77k    95.83%
+  315197 requests in 30.01s, 61.02MB read
+  Requests/sec:  10504.60
+Transfer/sec:      2.03MB

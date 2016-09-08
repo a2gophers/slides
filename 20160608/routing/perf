@@ -1,0 +1,21 @@
+# xmux
+trey@mariner9:~$ wrk -t4 -c100 -d30S --timeout 2000 "http://127.0.0.1:18016/yolo/herro"
+Running 30s test @ http://127.0.0.1:18016/yolo/herro
+  4 threads and 100 connections
+  Thread Stats   Avg      Stdev     Max   +/- Stdev
+    Latency     1.07ms  222.77us  10.20ms   90.65%
+    Req/Sec    23.20k     1.12k   26.50k    66.28%
+  2779253 requests in 30.10s, 307.46MB read
+Requests/sec:  92329.24
+Transfer/sec:     10.21MB
+              
+# express.js
+trey@mariner9:~$ wrk -t4 -c100 -d30S --timeout 2000 "http://127.0.0.1:18015/yolo/herro"
+Running 30s test @ http://127.0.0.1:18015/yolo/herro
+  4 threads and 100 connections
+  Thread Stats   Avg      Stdev     Max   +/- Stdev
+    Latency     8.99ms    1.06ms  45.77ms   95.54%
+    Req/Sec     2.80k   164.59     2.96k    95.08%
+  334232 requests in 30.01s, 64.71MB read
+Requests/sec:  11135.66
+Transfer/sec:      2.16MB

@@ -1,0 +1,75 @@
+Express.js vs net/http
+09 June 2016
+
+Trey Tacon
+Mixmax
+@ttacon
+ttacon@gmail.com
+
+* Shameless plug
+If you want to change communication, come checkout Mixmax
+
+.link https://mixmax.com Mixmax
+
+* Disclaimer
+
+- I'm not really comparing Express and net/http
+- Express is "minimalist web framework for Node.js"
+- net/http is a standard library package and *NOT* a framework
+- So I'm actually going to compare Express.js and julienschmidt/httprouter with urfave/negroni
+
+* Why use express.js?
+- You like Node
+- It makes writing a web service really easy
+- People say it's fast
+
+
+* Why use julienschmidt/httprouter and urfave/negroni
+- You like Go
+- It makes writing a web service really easy
+- It's super fast
+
+
+* Routing: Express
+.code routing/routing.js
+
+
+* Routing: xmux
+.code routing/routing.go
+
+
+* Routing: Perf difference
+.code routing/perf
+
+
+
+* Nested/Namespaced Routing: Express
+.code nested/nested.js
+
+* Nested/Namespaced Routing: xmux
+.code nested/nested.go
+
+* Nested/Namespaced Routing: Perf difference
+.code nested/perf
+
+
+
+* Middleware: Express
+.code middleware/middleware.js
+
+* Middleware: xmux
+.code middleware/middleware.go /START OMIT/,/END OMIT/
+
+* Middleware: Perf difference
+.code middleware/perf
+
+
+* Testimonials
+
+.link http://jordanorelli.com/post/31533769172/why-i-went-from-python-to-go-and-not-nodejs
+.link http://thenewstack.io/from-node-js-to-go-why-one-startup-made-the-switch/
+.link http://blog.digg.com/post/141552444676/making-the-switch-from-nodejs-to-golang
+.link http://www.hostingadvice.com/blog/nodejs-vs-golang/
+.link https://medium.com/@tjholowaychuk/farewell-node-js-4ba9e7f3e52b#.68kvymi2j
+.link http://engineering.dailymotion.com/our-way-to-go/
+
